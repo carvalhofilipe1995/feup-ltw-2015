@@ -5,5 +5,6 @@
   include_once('database/events.php');
   include_once("templates/header.php");  
   include_once("templates/testeFuncoes.php");
+  include_once("templates/mensal.php");
   include_once("templates/footer.php");
 ?>
