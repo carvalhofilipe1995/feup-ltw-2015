@@ -3,8 +3,9 @@
   include_once('database/connection.php');
   include_once('database/users.php');
   include_once('database/events.php');
-  include_once("templates/header.php");  
-  include_once("templates/testeFuncoes.php");
-  include_once("templates/mensal.php");
-  include_once("templates/footer.php");
+  include_once('templates/header.php');  
+  include_once('templates/testeFuncoes.php');
+  include_once('templates/mensal.php');
+  //include_once('templates/eventosPublicos.php'); 
+  include_once('templates/footer.php');
 ?>

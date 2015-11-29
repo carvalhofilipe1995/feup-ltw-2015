@@ -1,30 +1,27 @@
 var nameMonth = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 var currentMonth;
-var dayWeek;
 var day;
 var year;
 var month;
 var weeks;
-var products = ['ABCD', 'DEFG'];
-var sessao;
+var lastDay;
 $(document).ready(loadDocument);
 
 
 function loadDocument() {
-	$("input[value='next']").click(nextMonth);
-	$("input[value='previous']").click(previousMonth);
+	$("input[class='next']").click(nextMonth);
+	$("input[class='previous']").click(previousMonth);
 	loadCalendar();
 }
 
 function loadCalendar(){ // Cria calendário de acordo com o dia de hoje
 	var d = new Date();
-	dayWeek = d.getDay(); //0-6
 	day = d.getDate(); //1-31
 	year = d.getFullYear();
 	month = d.getMonth(); //0-11
 	currentMonth = month;
 	var firstDay = new Date(year, month, 1);
-	var lastDay = new Date(year, month + 1, 0);
+	lastDay = new Date(year, month + 1, 0);
 	weeks = Math.ceil((firstDay.getDay() + lastDay.getDate())/7);
 	drawCalendar(firstDay.getDay(), lastDay.getDate());
 }
@@ -32,7 +29,7 @@ function loadCalendar(){ // Cria calendário de acordo com o dia de hoje
 function updateCalendar(d){ // Troca calendário de acordo com o avanço ou recuo do mês
 	deleteCalendar();
 	var firstDay = new Date(year, month, 1);
-	var lastDay = new Date(year, month + 1, 0);
+	lastDay = new Date(year, month + 1, 0);
 	weeks = Math.ceil((firstDay.getDay() + lastDay.getDate())/7);
 	drawCalendar(firstDay.getDay(), lastDay.getDate());
 }
@@ -59,12 +56,12 @@ function drawCalendar(firstDay, lastDay) { // Desenha calendário
 			else {
 				if ((month==currentMonth) && (count==day)){
 					dia.addClass("hoje");
-					dia.append('<span class=dia>'+count+'</span>');
+					dia.append('<div class=container><span class=dia>'+count+'</span><div class="events-container"></div></div>');
 					count++;
 				}
 				else {
 					dia.addClass("valido");
-					dia.append('<span class=dia>'+count+'</span>');
+					dia.append('<div class=container><span class=dia>'+count+'</span><div class="events-container"></div></div>');
 					count++;
 				}
 			}	
@@ -87,7 +84,7 @@ function drawMonth() { // Escreve o nome do mês
 
 
 function nextMonth() { // Incrementa um mês no calendário
-	if (month == 11){
+	if (month == 11) {
 		month = 0;
 		year++;
 		}
@@ -110,32 +107,34 @@ function previousMonth() { // Decrementa um mês no caléndario
 	updateCalendar(d);
 }
 
-function returnDay(data) { // Retorna elemento td do dia
+function returnDay(data) { // Retorna d do dia
 	var formatoData = data.split('-');
-	if (formatoData['0'] != year) {
-		return null;
+	return $('.dia:contains('+formatoData['2']+')').parent('div').find('.events-container');
+}
+
+function loadEvents() 
+{
+	$.ajax("action_myEvents.php?year="+year+"&month="+month+"&lastDay="+lastDay.getDate(),
+	{
+		type: "GET",
+		data: "", 
+		success: function(data)
+		{
+			for (var i = 0; i < data.length; i++)
+			{
+				insertEvent(i, data[i].tema, data[i].dataOcorrencia);
+				console.log(data[i].tema + " - " + data[i].dataOcorrencia);
+			}
+		},
+		error: function(data)
+		{
+			console.log(data.responseText);
 		}
-	else if (formatoData['1'] != (month+1)){ // month vai desde 0-11 enquanto q na db vai de 1-12
-		return null;
-		}
-	else
-		return $('.dia:contains('+formatoData['2']+')').parent('td');
+	})
 }
 
-function loadEvents() {
-	var id = $('#id').val();
-	$.getJSON( "action_myEvents.php?id="+id, eventsLoad)
-}
 
-function eventsLoad(data){
-	$.each(data, insertEvent);
-}
-
-function insertEvent(key, data){
+function insertEvent(key, tema, data){
 	result = returnDay(data);
-	if (result==null)
-		return null
-	else {
-		result.append('<div class=evento>TESTE</div><br>');
-		}
+	result.append('<div class="evento">' + tema + '</div>');
 }

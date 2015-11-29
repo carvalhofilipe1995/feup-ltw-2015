@@ -1,7 +1,6 @@
 <?php if (isset($_SESSION['id'])) { ?>
-	<input type="hidden" id="id" value=<?php echo $_SESSION['id']?> >
-	<input type="button" value="previous"/>
-	<input type="button" value="next"/>
+	<input type="button" class="next"/>
+	<input type="button" class="previous"/>
 	<div class="wrapper">
 		<h1></h1>
 		<div class="mensal">
@@ -27,7 +26,7 @@
 			</table>
 		</div>
 	</div>
-	<div id=teste>
+	<div id="teste">
 	</div>
 	<script type="text/javascript" src="js/mensal.js"></script>
 <?php }?>
