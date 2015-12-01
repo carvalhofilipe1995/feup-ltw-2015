@@ -114,7 +114,7 @@ function returnDay(data) { // Retorna d do dia
 
 function loadEvents() 
 {
-	$.ajax("action_myEvents.php?year="+year+"&month="+month+"&lastDay="+lastDay.getDate(),
+	$.ajax("../action_myEvents.php?year="+year+"&month="+month+"&lastDay="+lastDay.getDate(),
 	{
 		type: "GET",
 		data: "", 

@@ -6,9 +6,13 @@
   if ($id != null) {
     $_SESSION['username'] = $_POST['username'];   
 	$_SESSION['id'] = $id['uid'];   
-	header('Location: ' . $_SERVER['HTTP_REFERER']);
+	header('Location: templates/eventosPublicos.php');
 	}
   else {
-	echo('Password errada');
+	echo '<script language="javascript">';
+	echo 'alert("Wrong username or password")';
+	echo '</script>';
+	//header('Location: ' . $_SERVER['HTTP_REFERER']);
+
   }
 ?>

@@ -9,7 +9,7 @@ function loadDocument() {
 }
 
 function loadPublicEvents(){
-	$.ajax("action_publicEvents.php",
+	$.ajax("../action_publicEvents.php",
 	{
 		type: "GET",
 		data: "",
@@ -29,7 +29,7 @@ function loadPublicEvents(){
 }
 
 function insertEvent(id, fotografia){
-	content = $(".publicEventContainer");
-	content.append("<img src="+fotografia+" alt='Evento' class='fotoEvento'><br>");
+	content = $(".content");
+	content.append("<img src=../"+fotografia+" alt='Evento' class='fotoEvento'><br>");
 }
 

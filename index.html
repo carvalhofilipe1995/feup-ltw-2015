@@ -1,56 +1,108 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Login/Sign-In</title>  
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="logmod">
+  <div class="logmod__wrapper">
+    <div class="logmod__container">
+      <ul class="logmod__tabs">
+        <li data-tabtar="lgm-2"><a href="#">Login</a></li>
+        <li data-tabtar="lgm-1"><a href="#">Sign Up</a></li>
+      </ul>
+      <div class="logmod__tab-wrapper">
+      <div class="logmod__tab lgm-1">
+        <div class="logmod__heading">
+          <span class="logmod__heading-subtitle">Enter your personal details <strong>to create an acount</strong></span>
+        </div>
+        <div class="logmod__form">
+          <form accept-charset="utf-8" action="action_register.php" method="post" enctype="multipart/form-data" class="simform">
+            <div class="sminputs">
+              <div class="input full">
+                <label class="string optional" for="username">Username*</label>
+                <input class="string optional" name="username" placeholder="Username" type="text"  />
+              </div>
+            </div>
+            <div class="sminputs">
+              <div class="input string optional">
+                <label class="string optional" for="password">Password *</label>
+                <input class="string optional"  name="password" placeholder="Password" type="text" >
+              </div>
+              <div class="input string optional">
+                <label class="string optional" for="user-pw-repeat">Repeat password *</label>
+                <input class="string optional" placeholder="Repeat password" type="text" >
+              </div>
+            </div>
+			<div class="sminputs">
+              <div class="input string optional">
+                <label class="string optional" for="email">Email*</label>
+                <input class="string optional" type="email" name="email" placeholder="Email" >
+              </div>
+			  <div class="input string optional">
+                <label class="string optional" for="user-name">Date of birth*</label>
+                <input class="string optional"  name="bday" placeholder="Date of birth" type="date" >
+              </div>
+            </div>
+			
+			<div class="sminputs">
+              <div class="input full">
+                <label class="string optional" for="image">Profile picture*</label>
+                <input class="string optional" maxlength="255" name="image"  type="file" >
+              </div>
+            </div>
+			
+            <div class="simform__actions">
+              <input class="sumbit" name="commit" type="submit" value="REGISTER" />
+            </div> 
+          </form>
+        </div> 
+        <div class="logmod__alter">
+          <div class="logmod__alter-container">
+          </div>
+        </div>
+      </div>
+      <div class="logmod__tab lgm-2">
+        <div class="logmod__heading">
+          <span class="logmod__heading-subtitle">Enter your username and password <strong>to sign in</strong></span>
+        </div> 
+        <div class="logmod__form">
+          <form accept-charset="utf-8" action="action_login.php" method="post" class="simform">
+            <div class="sminputs">
+              <div class="input full">
+                <label class="string optional" for="username">Username*</label>
+                <input class="string optional"  placeholder="Username" type="text" name="username" required>
+              </div>
+            </div>
+            <div class="sminputs">
+              <div class="input full">
+                <label class="string optional" for="password">Password *</label>
+                <input class="string optional" placeholder="Password" type="password" name="password" required>
+                <span class="hide-password">Show</span>
+              </div>
+            </div>
+            <div class="simform__actions">
+              <input class="sumbit" name="commit" type="submit" value="LOGIN">
+            </div> 
+          </form>
+        </div> 
+        <div class="logmod__alter">
+          <div class="logmod__alter-container">
 
-	<head>
-
-		<meta charset="utf-8">
-		<title>Link-Zone</title>
-    <!-- scaled down the entire web page to fit the screen for any device -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="icon" type="image/png" href="https://github.com/carvalhofilipe1995/feup-ltw-2015/blob/master/resources/logo.png?raw=true"/>
-
-		  <!-- link with some stylesheet -->
-
-	</head>
-
-
-	<body >
-
-		<div class="main_content">
-
-			<h1> Link-Zone </h1>
-			<p> Welcome to Link-Zone </p>
-
-		<!-- login-form -->
-		<form class="login-form" action="" method="post">
-				<input autocomplete="off" class="" type="text" name="username" placeholder="USERNAME">
-				<input class="" type="password" name="password" placeholder="PASSWORD">
-				<input type="submit" value="log in">
-	 	</form>
-
-		 <!-- signup-form -->
-		 <form class="signup-form" action="" method="post">
-			 <input type="text" name="username" placeholder="USERNAME">
-			 <input type="password" name="password" placeholder="PASSWORD">
-			 <input type="password" name="confirm" placeholder="CONFIRM PASSWORD">
-			 <input type="date" id="myDate" placeholder="BORN">
-			 <input type="text" name="email" placeholder="EMAIL">
-			 <input type="submit" value="Sign Up">
-		 </form>
-
-
-	 	</div> <!-- closing main_contetn -->
-
-	<footer>
-		<div class="footer">
-			<span class="copyright">2015 Link-Zone &#169; All rights reserved</span>
-			<span class="developers">Developed by: Luís Carvalho &#38;&#38; Luís Coelho &#38;&#38; Vitor Varela</span>
-		</div>
-	</footer>
-
-	<script type="text/javascript" src="scripts/login.js"></script>
-
-
+          </div>
+        </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <script src='js/jquery-1.11.3.min.js'></script>
+    <script src="js/index.js"></script>
+ 
+    
   </body>
-
 </html>
