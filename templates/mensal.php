@@ -20,16 +20,25 @@
 				<a href="eventosPublicos.php" id="logo"><img src="../images/logo.png" alt="logo"></a>
 				<ul>
 					<li class="home">
-						<a href="eventosPublicos.php">Home</a>
+						<a href="eventosPublicos.php">Eventos</a>
 					</li>
 					<li class="selected about">
 						<a href="mensal.php">Mensal</a>
 					</li>
 					<li class="projects">
-						<a href="projects.html">Semanal</a>
+						<a href="semanal.php">Semanal</a>
 					</li>
 					<li class="blog">
-						<a href="blog.html">Diário</a>
+						<a href="diario.php">Diário</a>
+					</li>
+					<li class="about">
+						<a href="novoEvento.php">Adicionar</a>
+					</li>
+					<li class="projects">
+						<a href="convidarEvento.php">Convidar</a>
+					</li>
+					<li class="blog">
+						<a href="convites.php">Convites</a>
 					</li>
 				</ul>
 			</div>

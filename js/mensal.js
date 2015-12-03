@@ -122,8 +122,8 @@ function loadEvents()
 		{
 			for (var i = 0; i < data.length; i++)
 			{
-				insertEvent(i, data[i].tema, data[i].dataOcorrencia);
 				console.log(data[i].tema + " - " + data[i].dataOcorrencia);
+				insertEvent(data[i].tema, data[i].dataOcorrencia);
 			}
 		},
 		error: function(data)
@@ -134,7 +134,7 @@ function loadEvents()
 }
 
 
-function insertEvent(key, tema, data){
+function insertEvent(tema, data) {
 	result = returnDay(data);
 	result.append('<div class="evento">' + tema + '</div>');
 }

@@ -1,9 +1,7 @@
 <?php
 	session_start();
 ?>
-
 <!DOCTYPE html>
-<!-- Website template by freewebsitetemplates.com -->
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -11,21 +9,21 @@
 	<link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 <body>
-	<div id="background-green">
+	<div id="background-lightyellow">
 		background
 	</div>
 	<div class="page">
-		<div class="home-page">
+		<div class="project-page">
 			<div class="sidebar">
 				<a href="eventosPublicos.php" id="logo"><img src="../images/logo.png" alt="logo"></a>
 				<ul>
-					<li class="selected home">
+					<li class="home">
 						<a href="eventosPublicos.php">Eventos</a>
 					</li>
 					<li class="about">
 						<a href="mensal.php">Mensal</a>
 					</li>
-					<li class="projects">
+					<li class="selected projects">
 						<a href="semanal.php">Semanal</a>
 					</li>
 					<li class="blog">
@@ -45,9 +43,9 @@
 			</div>
 			<div class="body">
 				<?php if (isset($_SESSION['id'])) { ?>
-				<div class="content"> </div>
+				<div class="content">
+				
 				<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
-				<script type="text/javascript" src="../js/eventosPublicos.js"></script>
 				<?php } ?>
 							
 			</div>
