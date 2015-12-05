@@ -4,7 +4,7 @@
   include_once('database/events.php');
   // 15 casos distintos caso queira fazer uma unica instrução SQL... Maybe in another life brother!
   // Cada valor not null = query diferente, seems guud
-  if ($_POST['action'] == 'EDITAR') {
+  if ($_POST['commit'] == 'EDITAR') {
 	  if ($_POST['nome'] != "")
 		editEventNome($_POST['eid'], $_POST['nome']);
 	  if ($_POST['descricao'] != "")
@@ -20,7 +20,7 @@
 		move_uploaded_file($_FILES['image']["tmp_name"], 'photo/e'.$id.'.jpg');
 	  }
 	}
-  else
+  else 
 	deleteEvent($_POST['eid']);
   header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>

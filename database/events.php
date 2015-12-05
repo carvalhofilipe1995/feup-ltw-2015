@@ -27,19 +27,35 @@
   }
   function deleteEvent($eid){
     global $db;   
+	deleteParticipa($eid);	
+	deleteConvidado($eid);
+	deleteComentario($eid);
 	$query ="DELETE FROM evento WHERE eid=$eid";
 	$stmt = $db->prepare($query);
 	$stmt->execute();  
-	$query ="DELETE FROM participa WHERE eid=$eid";
+  }
+  
+  function deleteParticipa($eid){
+    global $db;   
+  	$query ="DELETE FROM participa WHERE eid='$eid'";
 	$stmt = $db->prepare($query);
 	$stmt->execute();  
-	$query ="DELETE FROM convidado WHERE eid=$eid";
+  }
+  
+  function deleteConvidado($eid){
+	global $db;
+	$query ="DELETE FROM convidado WHERE eid='$eid'";
 	$stmt = $db->prepare($query);
 	$stmt->execute();  
+  }
+  
+  function deleteComentario($eid){
+	global $db;
 	$query ="DELETE FROM comentario WHERE eid=$eid";
 	$stmt = $db->prepare($query);
 	$stmt->execute();  
   }
+  
   function getEventPhoto() { // Fotografia eventos publicos
     global $db;   
     $stmt = $db->prepare("SELECT eid, fotografia FROM evento WHERE tipo=0 AND dataOcorrencia > date('now')");

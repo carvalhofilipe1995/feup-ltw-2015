@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 <body>
-	<div id="background-lightgreen">
+	<div id="background-lightyellow">
 		background
 	</div>
 	<div class="page">
