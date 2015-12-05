@@ -10,5 +10,6 @@
 		</script>
 		<?php
 	}
-	header('Location: ' . $_SERVER['HTTP_REFERER']);
+	else
+		header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>
