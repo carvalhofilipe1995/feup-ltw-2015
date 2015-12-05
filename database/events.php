@@ -1,11 +1,45 @@
 <?php
-  function getEvent() { // Todos eventos públicos
+
+  function getEventDetails($eid) { // Detalhes evento público
     global $db;   
-    $stmt = $db->prepare('SELECT * FROM evento WHERE tipo=0');
+	$query = "SELECT * FROM evento  WHERE eid= '$eid'";
+    $stmt = $db->prepare($query);
     $stmt->execute();  	
-    return $stmt->fetchAll();
+    $events =  $stmt->fetchAll();
+	header("Content-Type: application/json");
+	echo json_encode($events);
+  }
+  function getComments($eid) { // Retorna comentários de um determinado evento
+	global $db;    
+	$query = "SELECT utilizador.nome, comentario.mensagem, utilizador.fotografia FROM comentario JOIN utilizador ON comentario.uid = utilizador.uid WHERE comentario.eid= $eid";
+	$stmt = $db->prepare($query);
+	$stmt->execute();  
+    $events = $stmt->fetchAll();	
+	header("Content-Type: application/json");
+	echo json_encode($events);	  
   }
   
+  function addComment($uid, $eid, $comentario){ // Inserir comentário
+  	global $db;   
+	$query = "INSERT INTO comentario VALUES ($uid, $eid, '$comentario')";
+    $stmt = $db->prepare($query);
+    return $stmt->execute();  
+  }
+  function deleteEvent($eid){
+    global $db;   
+	$query ="DELETE FROM evento WHERE eid=$eid";
+	$stmt = $db->prepare($query);
+	$stmt->execute();  
+	$query ="DELETE FROM participa WHERE eid=$eid";
+	$stmt = $db->prepare($query);
+	$stmt->execute();  
+	$query ="DELETE FROM convidado WHERE eid=$eid";
+	$stmt = $db->prepare($query);
+	$stmt->execute();  
+	$query ="DELETE FROM comentario WHERE eid=$eid";
+	$stmt = $db->prepare($query);
+	$stmt->execute();  
+  }
   function getEventPhoto() { // Fotografia eventos publicos
     global $db;   
     $stmt = $db->prepare("SELECT eid, fotografia FROM evento WHERE tipo=0 AND dataOcorrencia > date('now')");
@@ -37,14 +71,64 @@
 		addParticipant($id, $eid['max(eid)']); // Fix para o facto de não conseguir funcionar com triggers --"
 		return $eid['max(eid)'];
 		}
+		
 	else {
 		return null;
 		}
   }
   
+  function editEventNome($eid, $data) {
+    global $db;   
+	$query = "UPDATE evento SET tema='$data' WHERE eid=$eid";
+	var_dump($query);
+	$stmt = $db->prepare($query);
+	$stmt->execute();  
+  }
+  
+  function editEventData($eid, $data) {
+    global $db;   
+	$query = "UPDATE evento SET dataOcorrencia='$data' WHERE eid=$eid";
+	$stmt = $db->prepare($query);
+	$stmt->execute();  
+  }
+  
+  function editEventLocalizacao($eid, $data) {
+    global $db;   
+	$query = "UPDATE evento SET localizacao='$data' WHERE eid=$eid";
+	$stmt = $db->prepare($query);
+	$stmt->execute();  
+  }
+  
+  function editEventDescricao($eid, $data) {
+    global $db;   
+	$query = "UPDATE evento SET descricao='$data' WHERE eid=$eid";
+	$stmt = $db->prepare($query);
+	$stmt->execute();  
+  }
+  
+  function editEventFotografia($eid, $data) {
+    global $db;   
+	$query = "UPDATE evento SET fotografia='$data' WHERE eid=$eid";
+	$stmt = $db->prepare($query);
+	$stmt->execute();  
+  }
+  
+  function editEventTempo($eid, $data) {
+    global $db;   
+	$query = "UPDATE evento SET tempo='$data' WHERE eid=$eid";
+	$stmt = $db->prepare($query);
+	$stmt->execute();  
+  }
+  
+  
+
   function addParticipant($participante, $evento) { // Novo participante
 	global $db;   
     $stmt = $db->prepare('INSERT INTO participa VALUES (?,?, 1)');
+	
+	if (checkParticipa($participante, $evento) != null) {
+		return 0;
+	}
 	
 	if (checkInvited($participante, $evento) != null) {
 		removeGuest($participante, $evento);
@@ -59,9 +143,9 @@
     return $stmt->execute(array($participante));  
   }
   
- function getOrganiza($id) {
+ function getOrganiza($id) { // Eventos organizados pelo id
 	global $db;   
-	$query ="SELECT eid, tema FROM evento WHERE uid ='$id' AND dataOcorrencia > date('now') ";
+	$query ="SELECT * FROM evento WHERE uid ='$id' AND dataOcorrencia > date('now') ";
     $stmt = $db->prepare($query);
 	$stmt->execute();
 	$result = $stmt->fetchAll();	
@@ -83,7 +167,14 @@
     $stmt = $db->prepare($query);
 	$stmt->execute();
 	return $stmt->fetch();
+  }
 
+  function checkParticipa($uid, $eid) {
+  	global $db;   
+	$query ="SELECT * FROM participa WHERE uid ='$uid' AND eid='$eid' AND estado='1'";
+    $stmt = $db->prepare($query);
+	$stmt->execute();
+	return $stmt->fetch();
   }
   
   function getInvites($uid) {
@@ -99,9 +190,14 @@
   
   function addGuest($convidado, $evento) { // Adicionar convidado
 	global $db;
-    $stmt = $db->prepare('INSERT INTO convidado VALUES (?,?, 1)');
 	$username = getUserId($convidado);
-    $stmt->execute(array($username['uid'], $evento));  
+	if (checkParticipa($username['uid'], $evento) != null) // Verifica se convidado já participa
+		return 0;
+	if (checkInvited($username['uid'], $evento) != null)
+		return 0;
+    $stmt = $db->prepare('INSERT INTO convidado VALUES (?,?, 1)');
+    $stmt->execute(array($username['uid'], $evento));
+	return 1;
   }
   
   function removeGuest($convidado, $evento) { // Remover convidado

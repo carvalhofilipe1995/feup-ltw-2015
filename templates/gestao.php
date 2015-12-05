@@ -1,9 +1,7 @@
 <?php
 	session_start();
 ?>
-
 <!DOCTYPE html>
-<!-- Website template by freewebsitetemplates.com -->
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -11,15 +9,15 @@
 	<link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 <body>
-	<div id="background-green">
+	<div id="background-lightgreen">
 		background
 	</div>
 	<div class="page">
-		<div class="home-page">
+		<div class="about-page">
 			<div class="sidebar">
 				<a href="eventosPublicos.php" id="logo"><img src="../images/logo.png" alt="logo"></a>
 				<ul>
-					<li class="selected home">
+					<li class="home">
 						<a href="eventosPublicos.php">Eventos</a>
 					</li>
 					<li class="about">
@@ -34,7 +32,7 @@
 					<li class="home">
 						<a href="novoEvento.php">Adicionar</a>
 					</li>
-					<li class="about">
+					<li class="selected about">
 						<a href="gestao.php">Gestão</a>
 					</li>
 					<li class="projects">
@@ -48,13 +46,30 @@
 			</div>
 			<div class="body">
 				<?php if (isset($_SESSION['id'])) { ?>
-				<div class="content"> </div>
+				<div class="content">
+					<div class="containerGestao">
+					<div class="left">
+						<div class="activo">
+							<li id="tab1">CONVIDAR</li>
+						</div>
+					</div>
+					<div class="right">
+						<div class="inactivo">
+							<li id="tab2">EDITAR</li>
+						</div>
+					</div>
+					<div class="caixa">
+					</div>
+				</div>
 				<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
-				<script type="text/javascript" src="../js/eventosPublicos.js"></script>
-				<?php } 
+				<script type="text/javascript" src="../js/gestao.js"></script>
+				<script>
+			</script>
+<?php }
 				else
 					header('Location: ../index.html');
-				?>			
+				?>	
+							
 			</div>
 		</div>
 	</div>

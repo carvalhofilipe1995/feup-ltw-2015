@@ -1,4 +1,4 @@
-var nameMonth = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+ï»¿var nameMonth = ['Janeiro', 'Fevereiro', 'MarÃ§o', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 var currentMonth;
 var day;
 var year;
@@ -14,7 +14,7 @@ function loadDocument() {
 	loadCalendar();
 }
 
-function loadCalendar(){ // Cria calendário de acordo com o dia de hoje
+function loadCalendar(){ // Cria calendÃ¡rio de acordo com o dia de hoje
 	var d = new Date();
 	day = d.getDate(); //1-31
 	year = d.getFullYear();
@@ -26,7 +26,7 @@ function loadCalendar(){ // Cria calendário de acordo com o dia de hoje
 	drawCalendar(firstDay.getDay(), lastDay.getDate());
 }
 
-function updateCalendar(d){ // Troca calendário de acordo com o avanço ou recuo do mês
+function updateCalendar(d){ // Troca calendÃ¡rio de acordo com o avanÃ§o ou recuo do mÃªs
 	deleteCalendar();
 	var firstDay = new Date(year, month, 1);
 	lastDay = new Date(year, month + 1, 0);
@@ -38,7 +38,7 @@ function deleteCalendar(){
 	$(".mensal").replaceWith("<div class=mensal><table><tr class = diasSemana><td>Domingo</td><td>Segunda</td><td>Terca</td><td>Quarta</td><td>Quinta</td><td>Sexta</td><td>Sabado</td></tr><tr class = semana><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></table></div>");
 }
 
-function drawCalendar(firstDay, lastDay) { // Desenha calendário	
+function drawCalendar(firstDay, lastDay) { // Desenha calendÃ¡rio	
 	var count=1;
 	drawMonth();
 	for (i=2;i<=weeks;i++) {
@@ -73,17 +73,17 @@ function drawCalendar(firstDay, lastDay) { // Desenha calendário
 	loadEvents();
 }
 
-function drawWeeks() { // Replica semanas até ter semanas suficientes
+function drawWeeks() { // Replica semanas atÃ© ter semanas suficientes
 	var newLine = $(".semana:last-child").clone();
 	$(".semana:last-child").after(newLine);
 }
 
-function drawMonth() { // Escreve o nome do mês
+function drawMonth() { // Escreve o nome do mÃªs
 	$("h1", ".wrapper").replaceWith("<h1>"+nameMonth[month]+" "+year+"</h1>");
 }
 
 
-function nextMonth() { // Incrementa um mês no calendário
+function nextMonth() { // Incrementa um mÃªs no calendÃ¡rio
 	if (month == 11) {
 		month = 0;
 		year++;
@@ -95,7 +95,7 @@ function nextMonth() { // Incrementa um mês no calendário
 	updateCalendar(d);
 }
 
-function previousMonth() { // Decrementa um mês no caléndario
+function previousMonth() { // Decrementa um mÃªs no calÃ©ndario
 	if (month == 0){
 		year--;
 		month = 11;

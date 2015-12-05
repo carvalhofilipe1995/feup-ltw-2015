@@ -9,11 +9,11 @@
 	<link rel="stylesheet" href="../css/style.css" type="text/css">
 </head>
 <body>
-	<div id="background-yellow">
+	<div id="background-lightgreen">
 		background
 	</div>
 	<div class="page">
-		<div class="about-page">
+		<div class="home-page">
 			<div class="sidebar">
 				<a href="eventosPublicos.php" id="logo"><img src="../images/logo.png" alt="logo"></a>
 				<ul>
@@ -29,14 +29,17 @@
 					<li class="blog">
 						<a href="diario.php">Diário</a>
 					</li>
-					<li class="selected about">
+					<li class="selected home">
 						<a href="novoEvento.php">Adicionar</a>
 					</li>
+					<li class="about">
+						<a href="gestao.php">Gestão</a>
+					</li>
 					<li class="projects">
-						<a href="convidarEvento.php">Convidar</a>
+						<a href="convites.php">Convites</a>
 					</li>
 					<li class="blog">
-						<a href="convites.php">Convites</a>
+						<a href="../action_logout.php">Logout</a>
 					</li>
 				</ul>
 				
@@ -44,19 +47,16 @@
 			<div class="body">
 				<?php if (isset($_SESSION['id'])) { ?>
 				<div class="content">
-				<form id = "validaEvento" action="../action_addEvent.php" method="post" enctype="multipart/form-data">
+				<form id = "registaEvento" action="../action_addEvent.php" method="post" enctype="multipart/form-data">
 				<div class="sminputs">
 				    <div class="input full">
-					<input type="hidden" name="id" value=<?php echo $_SESSION['id']; ?>>
 					<label class="string optional" for="nome">Nome*</label>
-
 					<input type="text" name="nome" placeholder="Nome" required>
 					</div>
 				</div>
 				<div class="sminputs">
 					<div class="input full">
 					<label class="string optional" for="descricao">Descrição*</label>
-
 					<textarea rows="2" cols="50" name="descricao" placeholder="Descrição"></textarea>
 					</div>
 				</div>
@@ -96,8 +96,10 @@
 				</form>
 				</div>
 				<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
-				<?php } ?>
-							
+<?php }
+				else
+					header('Location: ../index.html');
+				?>		
 			</div>
 		</div>
 	</div>

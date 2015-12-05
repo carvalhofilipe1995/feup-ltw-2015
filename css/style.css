@@ -2078,8 +2078,7 @@ p a:hover {
 
 .fotoEvento 
 {
-	min-width: 400px;
-	max-width: 600px;
+	width: 650px;
 	height: auto;
 }
 
@@ -2102,5 +2101,100 @@ input:focus
 .containerConvite
 {
 	padding: 15px;
-    background-color: #ce4718 !important;
+    background-color: white;
+}
+
+.caixaFoto
+{
+	display: inline-block;
+	padding-top: 20px;
+	width: 20%;
+	float: left;
+}
+.fotoDetalhe
+{
+	max-height: 100%;
+	max-width: 100%;
+}
+.caixaEvento {
+	display: inline-block;
+	width: 80%;
+}
+.caixaComentarios
+ {
+	background-color: #ce4718;
+	padding: 15px;
+}
+.containerComentario {
+	box-sizing: border-box;       
+	-moz-box-sizing: border-box;                          
+	-webkit-box-sizing: border-box; 
+	background-color: #cba200;
+	height: 160px;
+	border-style: solid;
+	border-width: 1px;
+	padding: 10px;
+}
+.containerComentario textarea {
+	outline: none;
+	border: 0;
+	width: 100%;
+	height: 100%;
+	background-color: inherit;
+}
+.caixaComentario {
+	padding-left: 20px;
+	display: table-cell;
+	vertical-align: top;
+	width: 80%;
+}
+.caixaProfile {
+	display: table-cell;
+	vertical-align: middle;
+	height: 140px;
+	max-width: 20%;
+}
+
+.activo {
+	padding-top: 20px;
+	vertical-align: center;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	background-color: white;
+}
+
+.inactivo {
+	padding-top: 20px;
+	vertical-align: center;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	background-color: #D2D8D8;
+	color: #809191;
+}
+
+.containerGestao {
+	width: 650px;
+	background-color: white;
+}
+
+li {
+	list-style-type: none;
+}
+
+.left {
+	width: 50%;
+	height: 60px;
+	float: left;
+}
+
+.right {
+	height: 60px;
+	margin-left: 50%;
+	width: 50%;
+}
+
+#remover {
+	background-color: red !important;
 }

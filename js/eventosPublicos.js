@@ -1,6 +1,3 @@
-var day;
-var year;
-var month;
 $(document).ready(loadDocument);
 
 
@@ -17,8 +14,8 @@ function loadPublicEvents(){
 		{
 			for (var i = 0; i < data.length; i++)
 			{
-				insertEvent(data[i].id, data[i].fotografia);
-				console.log(data[i].id + " - " + data[i].fotografia);
+				insertEvent(data[i].eid, data[i].fotografia);
+				console.log(data[i].eid + " - " + data[i].fotografia);
 			}
 		},
 		error: function(data)
@@ -30,6 +27,6 @@ function loadPublicEvents(){
 
 function insertEvent(id, fotografia){
 	content = $(".content");
-	content.append("<img src=../"+fotografia+" alt='Evento' class='fotoEvento'><br>");
+	content.append("<a href='detalhesEvento.php?eid="+id+"'><img src=../"+fotografia+" alt='Evento' class='fotoEvento'></a><br>");
 }
 

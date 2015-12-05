@@ -9,10 +9,11 @@
 	header('Location: templates/eventosPublicos.php');
 	}
   else {
-	echo '<script language="javascript">';
-	echo 'alert("Wrong username or password")';
-	echo '</script>';
-	//header('Location: ' . $_SERVER['HTTP_REFERER']);
-
-  }
+	?>
+	<script type="text/javascript">
+	alert("Username ou password errada");
+	window.location.href = "index.html";
+	</script>
+	<?php
+	}
 ?>

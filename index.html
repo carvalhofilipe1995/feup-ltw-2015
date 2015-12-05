@@ -21,7 +21,7 @@
           <span class="logmod__heading-subtitle">Introduza os seus dados pessoais <strong>para criar uma conta</strong></span>
         </div>
         <div class="logmod__form">
-          <form accept-charset="utf-8" action="action_register.php" method="post" enctype="multipart/form-data" class="simform">
+          <form accept-charset="utf-8" id="registaUtilizador" action="action_register.php" method="post" enctype="multipart/form-data" class="simform">
             <div class="sminputs">
               <div class="input full">
                 <label class="string optional" for="username">Username*</label>
@@ -48,7 +48,7 @@
 			
               <div class="input string optional">
                 <label class="string optional" for="image">Profile picture*</label>
-                <input class="string optional" maxlength="255" name="image"  type="file" >
+                <input class="string optional" maxlength="255" name="image"  type="file" accept=".png, .jpg">
               </div>
             </div>
 			
@@ -97,7 +97,6 @@
 </div>
     <script src='js/jquery-1.11.3.min.js'></script>
     <script src="js/index.js"></script>
- 
     
   </body>
 </html>

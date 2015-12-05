@@ -13,7 +13,7 @@
 		background
 	</div>
 	<div class="page">
-		<div class="blog-page">
+		<div class="project-page">
 			<div class="sidebar">
 				<a href="eventosPublicos.php" id="logo"><img src="../images/logo.png" alt="logo"></a>
 				<ul>
@@ -29,14 +29,17 @@
 					<li class="blog">
 						<a href="diario.php">Diário</a>
 					</li>
-					<li class="about">
+					<li class="home">
 						<a href="novoEvento.php">Adicionar</a>
 					</li>
-					<li class="projects">
-						<a href="convidarEvento.php">Convidar</a>
+					<li class="about">
+						<a href="gestao.php">Gestão</a>
 					</li>
-					<li class="selected blog">
+					<li class="selected projects">
 						<a href="convites.php">Convites</a>
+					</li>
+					<li class="blog">
+						<a href="../action_logout.php">Logout</a>
 					</li>
 				</ul>
 				
@@ -47,7 +50,10 @@
 				
 				<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
 				<script type="text/javascript" src="../js/convites.js"></script>
-				<?php } ?>
+				<?php } 
+				else
+					header('Location: index.html');
+				?>		
 							
 			</div>
 		</div>
