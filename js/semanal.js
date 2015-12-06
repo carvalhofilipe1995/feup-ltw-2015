@@ -84,17 +84,19 @@ function nextWeek() {
   if (lastDayWeek > nextMonth.getDate()) {
 	lastDayWeek = lastDayWeek - nextMonth.getDate();
 	lastDayMonth++;
-	if (lastDayMonth == 12)
+	if (lastDayMonth == 12) {
 		lastDayMonth = 0;
 		lastDayYear++;
+		}
   }
   nextMonth = new Date(firstDayYear, firstDayMonth + 1, 0);
   if (firstDayWeek > nextMonth.getDate()) {
 	firstDayWeek = firstDayWeek - nextMonth.getDate();
 	firstDayMonth++;
-	if (firstDayMonth == 12)
+	if (firstDayMonth == 12) {
 		firstDayMonth = 0;
 		firstDayYear++;
+		}
   }
   updateCalendar();
 }
@@ -106,17 +108,19 @@ function previousWeek() {
 	var previousMonth = new Date(firstDayYear, firstDayMonth, 0); // ultimo dia do mes anterior
 	firstDayWeek = previousMonth.getDate() + firstDayWeek;
 	firstDayMonth--;
-	if (firstDayMonth == -1)
-		firstDayMonth == 12;
+	if (firstDayMonth == -1) {
+		firstDayMonth = 11;
 		firstDayYear--;
+	}
   }
   if (lastDayWeek < 1) { // 0 ou numero negativo
 	var previousMonth = new Date(lastDayYear, lastDayMonth, 0); // ultimo dia do mes anterior
 	lastDayWeek = previousMonth.getDate() + lastDayWeek;
 	lastDayMonth--;
-	if (lastDayMonth == -1)
-		lastDayMonth == 12;
+	if (lastDayMonth == -1) {
+		lastDayMonth = 11;
 		lastDayYear--;
+	}
   }
   updateCalendar();
 }
