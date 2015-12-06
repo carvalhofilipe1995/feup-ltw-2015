@@ -137,24 +137,21 @@
 	$stmt->execute();  
   }
   
-  
-
   function addParticipant($participante, $evento) { // Novo participante
     global $db;   
     $stmt = $db->prepare('INSERT INTO participa VALUES (?,?, 1)');
-	
 	if (checkParticipa($participante, $evento)) {
 		return 0;
 	}
-	
 	if (checkInvited($participante, $evento)) {
 		removeGuest($participante, $evento);
 	}
-    return $stmt->execute(array($participante, $evento));  
+  $stmt->execute(array($participante, $evento));  
+  return 1;
   }
   
   function removeParticipant($participante) { // Remover participante
-	global $db;   
+    global $db;   
     $stmt = $db->prepare('UPDATE participa SET estado=0 WHERE uid=?');
     return $stmt->execute(array($participante));  
   }
@@ -188,7 +185,7 @@
   function checkParticipa($uid, $eid) {
   	global $db;   
 	$query ="SELECT * FROM participa WHERE uid ='$uid' AND eid='$eid' AND estado='1'";
-    	$stmt = $db->prepare($query);
+    $stmt = $db->prepare($query);
 	$stmt->execute();
 	return $stmt->fetch();
   }
@@ -217,7 +214,7 @@
   }
   
   function removeGuest($convidado, $evento) { // Remover convidado
-	global $db;  
+    global $db;  
     $stmt = $db->prepare('UPDATE convidado SET estado=0 WHERE uid=? AND eid=?');
     $stmt->execute(array($convidado, $evento));  
   }

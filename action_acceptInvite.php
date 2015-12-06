@@ -2,7 +2,12 @@
 	session_start();
 	include_once('database/connection.php');
 	include_once('database/events.php');
-	if(addParticipant($_SESSION['id'], $_SESSION['eid']) == 0) {
+	if (isset($_SESSION['eid'])){
+		$eid = $_SESSION['eid'];
+		}
+	else 
+		$eid = $_POST['eid'];
+	if(addParticipant($_SESSION['id'], $eid) == 0) {
 		?>
 		<script type="text/javascript">
 		alert("Utilizador já participa nesse evento");
