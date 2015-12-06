@@ -112,7 +112,7 @@ function returnDay(data) { // Retorna d do dia
 	var result = $('.dia').filter(function() {
     return $(this).text() === formatoData['2'];
 		}).parent('div').find('.events-container');
-	if (result.length == 0) { // Dia com um algarismo fica 01 (...) Bug fix
+	if (result.length == 0) { // Dia com um algarismo fica 01 logo != 1.. Bug fix
 		formatoData['2'] = formatoData['2'].replace('0', '');
 		result = $('.dia').filter(function() {
 			return $(this).text() === formatoData['2'];

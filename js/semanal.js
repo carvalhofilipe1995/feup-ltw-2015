@@ -1,45 +1,61 @@
 var nameMonth = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-var currentMonth;
+var firstDayMonth;
+var lastDayMonth;
 var day;
-var year;
-var month;
+var firstDayYear;
+var lastDayYear;
+var finalMonth;
 var weeks;
 var lastDay;
 var date;
-var weekNumber;
-$(document).ready(loadWeeks);
+var firstDayWeek;
+var lastDayWeek;
+$(document).ready(loadDocument);
 
 
-function load() {
+function loadDocument() {
   $("input[class='next']").click(nextWeek);
   $("input[class='previous']").click(previousWeek);
   loadWeeks();
 }
 
-Date.prototype.getWeek = function() { // Returns the number of the week
-    var onejan = new Date(this.getFullYear(), 0, 1);
-    return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
-};
-
-function loadWeeks(){
+function loadWeeks() {
   var today = new Date();
-  day = today.getDay();
-  year = today.getFullYear();
-  month = today.getMonth();
-  currentMonth = month;
-  var firstDay = new Date(year, month, 1);
-	lastDay = new Date(year, month, 7);
-  weeks = Math.ceil((firstDay.getDay() + lastDay.getDate())/7);
-  weekNumber = today.getWeek() - 1;
+  day = today.getDate();
+  dayWeek = today.getDay(); // de 0 a 6
+  var year = today.getFullYear();
+  var month = today.getMonth();
+  firstDayMonth = month;
+  lastDayMonth = month;
+  firstDayYear = year;
+  lastDayYear = year;
+  firstDayWeek = day - dayWeek;
+  if (firstDayWeek < 1) { // 0 ou numero negativo
+	var previousMonth = new Date(firstDayYear, month, 0); // ultimo dia do mes anterior
+	firstDayWeek = previousMonth.getDate() + firstDayWeek;
+	firstDayMonth = month - 1;
+	if (firstDayMonth == -1)
+		firstDayMonth == 12;
+		firstDayYear--;
+  }
+  
+  lastDayWeek = day + 6;
+  var nextMonth = new Date(lastDayYear, month + 1, 0);
+  if (lastDayWeek > nextMonth.getDate()) {
+	lastDayWeek = lastDayWeek - nextMonth.getDate();
+	lastDayMonth = month + 1;
+	if (lastDayMonth == 12)
+		lastDayMonth = 0;
+		lastDayYear++;
+  }
   drawWeekTop();
+  loadEvents();
 }
 
 function updateCalendar() {
-
-}
-
-function drawCalendar() {
-
+	deleteSemanal();
+	drawWeekTop();
+	loadEvents();
 }
 
 function deleteSemanal() {
@@ -47,41 +63,74 @@ function deleteSemanal() {
 }
 
 function drawWeekTop() {
-	$("h1", ".wrapper").replaceWith("<h1>" + "Semana" + " " + weekNumber + "</h1>");
+	$("h1", ".wrapper").replaceWith("<h1>" + "Semana de " + firstDayWeek + " de " + nameMonth[firstDayMonth] + " de " + firstDayYear + " até " + lastDayWeek + " de " + nameMonth[lastDayMonth] + " de " + lastDayYear +"</h1>");
 }
 
 function returnDay(data) {
 	var formatoData = data.split('-');
-	return $('.dia:contains('+formatoData['2']+')').parent('div').find('.events-container');
+	var teste = new Date(firstDayYear, firstDayMonth + 1, 0);
+	linha = $(".semanal tr:first");
+	n = formatoData['2'] - firstDayWeek;
+	for (var i=0;i<n ;i++) {
+		linha = linha.next("tr");
+	}
+	return linha.children("td:last-child");
 }
 
 function nextWeek() {
-  if(weekNumber == 52){ // Um ano tem 52 semanas
-    weekNumber = 0;
-    year++;
-  } else {
-    weekNumber++;
+  firstDayWeek = firstDayWeek + 7;
+  lastDayWeek = lastDayWeek + 7;
+  var nextMonth = new Date(lastDayYear, lastDayMonth + 1, 0);
+  if (lastDayWeek > nextMonth.getDate()) {
+	lastDayWeek = lastDayWeek - nextMonth.getDate();
+	lastDayMonth++;
+	if (lastDayMonth == 12)
+		lastDayMonth = 0;
+		lastDayYear++;
   }
+  nextMonth = new Date(firstDayYear, firstDayMonth + 1, 0);
+  if (firstDayWeek > nextMonth.getDate()) {
+	firstDayWeek = firstDayWeek - nextMonth.getDate();
+	firstDayMonth++;
+	if (firstDayMonth == 12)
+		firstDayMonth = 0;
+		firstDayYear++;
+  }
+  updateCalendar();
 }
 
 function previousWeek() {
-  if(weekNumber == 1){
-    weekNumber = 52;
-    year--;
-  } else {
-    weekNumber--;
+  firstDayWeek = firstDayWeek - 7;
+  lastDayWeek = lastDayWeek - 7;
+  if (firstDayWeek < 1) { // 0 ou numero negativo
+	var previousMonth = new Date(firstDayYear, firstDayMonth, 0); // ultimo dia do mes anterior
+	firstDayWeek = previousMonth.getDate() + firstDayWeek;
+	firstDayMonth--;
+	if (firstDayMonth == -1)
+		firstDayMonth == 12;
+		firstDayYear--;
   }
+  if (lastDayWeek < 1) { // 0 ou numero negativo
+	var previousMonth = new Date(lastDayYear, lastDayMonth, 0); // ultimo dia do mes anterior
+	lastDayWeek = previousMonth.getDate() + lastDayWeek;
+	lastDayMonth--;
+	if (lastDayMonth == -1)
+		lastDayMonth == 12;
+		lastDayYear--;
+  }
+  updateCalendar();
 }
 
 
 function loadEvents()
 {
-	$.ajax("../action_myEvents.php?year="+year+"&month="+month+"&lastDay="+lastDay.getDate(),
+	$.ajax("../action_myEventsWeek.php?firstDayYear="+firstDayYear+"&lastDayYear="+lastDayYear+"&firstDayMonth="+firstDayMonth+"&lastDayMonth="+lastDayMonth+"&firstDay="+firstDayWeek+"&lastDay="+lastDayWeek,
 	{
 		type: "GET",
 		data: "",
 		success: function(data)
 		{
+
 			for (var i = 0; i < data.length; i++)
 			{
 				console.log(data[i].tema + " - " + data[i].dataOcorrencia);
