@@ -221,4 +221,16 @@
     $stmt = $db->prepare('UPDATE convidado SET estado=0 WHERE uid=? AND eid=?');
     $stmt->execute(array($convidado, $evento));  
   }
+
+  function getDayEventPhoto($id, $data){
+	global $db;
+	$stmt = $db->prepare("SELECT evento.eid, evento.fotografia FROM evento JOIN participa ON participa.eid = evento.eid WHERE participa.uid= '$id' AND evento.dataOcorrencia  = '$data'");
+	$stmt->execute();
+    $events = $stmt->fetchAll();
+	header("Content-Type: application/json");
+	echo json_encode($events);
+
+	// "SELECT eid, fotografia FROM evento JOIN participa ON participa.eid = evento.eid WHERE participa.uid= '$id' AND evento.dataOcorrencia  BETWEEN '$data' AND '$data'"
+  }
+
 ?>
