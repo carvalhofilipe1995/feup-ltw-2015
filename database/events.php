@@ -58,7 +58,7 @@
   
   function getEventPhoto() { // Fotografia eventos publicos
     global $db;   
-    $stmt = $db->prepare("SELECT eid, fotografia FROM evento WHERE tipo=0 AND dataOcorrencia > date('now')");
+    $stmt = $db->prepare("SELECT eid, fotografia FROM evento WHERE tipo=0 AND dataOcorrencia > date('now') ORDER BY dataOcorrencia ASC");
     $stmt->execute();  	
     $events = $stmt->fetchAll();
 	header("Content-Type: application/json");

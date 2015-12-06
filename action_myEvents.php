@@ -8,7 +8,7 @@
 		$month = '0'.$_GET['month'];
 	else 
 		$month = $_GET['month'];	
-	$dataInicio = $_GET['year']."-".$month."-1";
+	$dataInicio = $_GET['year']."-".$month."-01";
 	$dataFim = $_GET['year']."-".$month."-".$_GET['lastDay'];
 	getMyEvent($_SESSION['id'], $dataInicio, $dataFim);
 ?>

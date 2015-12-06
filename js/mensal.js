@@ -109,7 +109,16 @@ function previousMonth() { // Decrementa um mês no caléndario
 
 function returnDay(data) { // Retorna d do dia
 	var formatoData = data.split('-');
-	return $('.dia:contains('+formatoData['2']+')').parent('div').find('.events-container');
+	var result = $('.dia').filter(function() {
+    return $(this).text() === formatoData['2'];
+		}).parent('div').find('.events-container');
+	if (result.length == 0) { // Dia com um algarismo fica 01 (...) Bug fix
+		formatoData['2'] = formatoData['2'].replace('0', '');
+		result = $('.dia').filter(function() {
+			return $(this).text() === formatoData['2'];
+		}).parent('div').find('.events-container');
+	}
+	return result;
 }
 
 function loadEvents() 
