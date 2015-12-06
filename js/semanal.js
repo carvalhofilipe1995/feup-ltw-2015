@@ -63,7 +63,7 @@ function deleteSemanal() {
 }
 
 function drawWeekTop() {
-	$("h1", ".wrapper").replaceWith("<h1>" + "Semana de " + firstDayWeek + " de " + nameMonth[firstDayMonth] + " de " + firstDayYear + " até " + lastDayWeek + " de " + nameMonth[lastDayMonth] + " de " + lastDayYear +"</h1>");
+	$("h1", ".wrapper").replaceWith("<h1>"+ firstDayWeek + " de " + nameMonth[firstDayMonth] + " de " + firstDayYear + " até " + lastDayWeek + " de " + nameMonth[lastDayMonth] + " de " + lastDayYear +"</h1>");
 }
 
 function returnDay(data) {
