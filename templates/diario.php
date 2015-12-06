@@ -45,14 +45,37 @@
 				
 			</div>
 			<div class="body">
-				<?php if (isset($_SESSION['id'])) { ?>
+	<?php if (isset($_SESSION['id'])) { ?>
+				
+				
+				
 				<div class="content">
+					
+					<input type="button" class="next"/>
+					<input type="button" class="previous"/>
+					 
+					<h1 class = titlee>   </h1>
+					
+					<div class = DayEvents>
+					
+					
+					</div>
+					
+										
+				
+				</div>
+				
 				
 				<script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
-<?php }
-				else
+				<script type="text/javascript" src="../js/diario.js"></script>
+					
+	<?php }  
+	
+	else
 					header('Location: ../index.html');
-				?>		
+				?>
+	
+						
 			</div>
 		</div>
 	</div>
